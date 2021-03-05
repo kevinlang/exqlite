@@ -187,6 +187,9 @@ defmodule Exqlite.Connection do
       :deferred when transaction_status == :idle ->
         handle_transaction(:begin, "BEGIN TRANSACTION", state)
 
+      :transaction when transaction_status == :idle ->
+        handle_transaction(:begin, "BEGIN TRANSACTION", state)
+
       :immediate when transaction_status == :idle ->
         handle_transaction(:begin, "BEGIN IMMEDIATE TRANSACTION", state)
 
@@ -227,7 +230,7 @@ defmodule Exqlite.Connection do
         end
 
       mode
-      when mode in [:deferred, :immediate, :exclusive] and
+      when mode in [:deferred, :immediate, :exclusive, :transaction] and
              transaction_status == :transaction ->
         handle_transaction(:rollback, "ROLLBACK TRANSACTION", state)
     end
