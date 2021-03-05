@@ -32,8 +32,10 @@ defmodule Exqlite.MixProject do
     [
       {:db_connection, "~> 2.1"},
       {:decimal, "~> 1.6 or ~> 2.0"},
+
       #{:ecto_sql, "~> 3.5.4"},
       #{:ecto, "~> 3.5.8"},
+
       {:ets, "~> 0.8.1"},
       {:elixir_make, "~> 0.6", runtime: false},
       {:ex_doc, "~> 0.23.0", only: [:dev], runtime: false},
@@ -49,8 +51,7 @@ defmodule Exqlite.MixProject do
   defp package do
     [
       files: ~w(
-        lib/exqlite.ex
-        lib/exqlite/
+        lib
         .formatter.exs
         mix.exs
         README.md
@@ -70,7 +71,9 @@ defmodule Exqlite.MixProject do
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib/exqlite", "lib/exqlite.ex"]
+  defp elixirc_paths(_),
+    #do: ["lib"]
+    do: ["lib/exqlite", "lib/exqlite.ex"]
 
   defp test_paths, do: ["test"]
 end
