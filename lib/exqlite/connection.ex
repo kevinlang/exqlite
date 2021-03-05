@@ -210,7 +210,7 @@ defmodule Exqlite.Connection do
         handle_transaction(:commit, "RELEASE SAVEPOINT exqlite_savepoint", state)
 
       mode
-      when mode in [:deferred, :immediate, :exclusive] and
+      when mode in [:deferred, :immediate, :exclusive, :transaction] and
              transaction_status == :transaction ->
         handle_transaction(:commit, "COMMIT", state)
     end
