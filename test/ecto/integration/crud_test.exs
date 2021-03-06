@@ -50,6 +50,16 @@ defmodule Ecto.Integration.CrudTest do
     end
   end
 
+  describe "delete" do
+    test "delete_all" do
+      TestRepo.insert!(%Product{name: "hello"})
+      assert [_] = TestRepo.all(Product)
+
+      assert {1, _} = TestRepo.delete_all(Product)
+      assert [] == TestRepo.all(Product)
+    end
+  end
+
   describe "transaction" do
     test "successful user and account creation" do
       {:ok, _} =
